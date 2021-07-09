@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :my_blog, MyBlogWeb.Endpoint,
   url: [host: "bydeley.dev", port: 443],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
   server: true,
   force_ssl: [hsts: true],
   http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
