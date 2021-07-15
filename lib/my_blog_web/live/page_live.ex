@@ -55,4 +55,7 @@ defmodule MyBlogWeb.PageLive do
   defp draw(:east), do: ">"
   defp draw(:south), do: "\\/"
   defp draw(:west), do: "<"
+
+  defp in_progress({x, y, _dir}) when x > 0 or y > 0, do: true
+  defp in_progress(_), do: false
 end

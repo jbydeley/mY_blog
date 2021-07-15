@@ -1,7 +1,10 @@
 <%= if !@started do %>
   <button phx-click="start">Start</button>
 <% else %>
-  <button phx-click="restart">Reset</button> <button phx-click="stop">Stop</button>
+  <button phx-click="stop">Stop</button>
+<% end %>
+<%= if in_progress(@loc) do %>
+  <button phx-click="restart">Reset</button>
 <% end %>
 <div class="board">
   <%= for y <- 0..@size do %>
