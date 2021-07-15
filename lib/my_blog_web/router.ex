@@ -17,7 +17,7 @@ defmodule MyBlogWeb.Router do
   scope "/", MyBlogWeb do
     pipe_through :browser
 
-    # live "/", PageLive, :index
+    live "/roomba", PageLive, :index
     get "/", PageController, :index
   end
 
