@@ -1,5 +1,6 @@
 /* This file is for your main application css. */
 @import "./phoenix.css";
+@import "../node_modules/nprogress/nprogress.css";
 
 /* LiveView specific classes for your customizations */
 .phx-no-feedback.invalid-feedback,
@@ -87,4 +88,42 @@
   color: #a94442;
   display: block;
   margin: -1rem 0 2rem;
+}
+
+.board {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 330px;
+  height: 330px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-grow: 1;
+  justify-items: center;
+}
+
+.row:last-of-type {
+  border-bottom: 1px solid #393939;
+}
+.col {
+  border: 1px solid #393939;
+  border-left: 0;
+  border-bottom: 0;
+  flex-grow: 1;
+  justify-items: center;
+  height: 33px;
+  width: 33px;
+}
+
+.col:first-child {
+  border-left: 1px solid #393939;
+}
+
+.active {
+  background-color: red;
 }
