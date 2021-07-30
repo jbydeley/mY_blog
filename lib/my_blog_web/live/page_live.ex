@@ -9,19 +9,14 @@ defmodule MyBlogWeb.PageLive do
   end
 
   @impl true
-  def handle_event("start", _params, socket) do
+  def handle_event("toggle", _params, socket) do
     loop()
-    {:noreply, assign(socket, started: true)}
+    {:noreply, assign(socket, started: !socket.assigns.started)}
   end
 
   @impl true
   def handle_event("restart", _params, socket) do
     {:noreply, restart(socket)}
-  end
-
-  @impl true
-  def handle_event("stop", _params, socket) do
-    {:noreply, assign(socket, started: false)}
   end
 
   @impl true
@@ -38,6 +33,7 @@ defmodule MyBlogWeb.PageLive do
         {:noreply, assign(socket, started: false)}
       {x, y, dir} ->
         loop()
+        socket = push_event(socket, "move", %{x: x, y: y, dir: to_string(dir)})
         {:noreply, assign(socket, loc: {x, y, dir}, dir: dir)}
     end
   end
@@ -48,14 +44,12 @@ defmodule MyBlogWeb.PageLive do
 
   defp restart(socket) do
     socket
+    |> push_event("move", %{x: 0, y: 0, dir: "east"})
     |> assign(size: 9, loc: {0, 0, :east}, dir: :east, bad: [], started: false)
   end
 
-  defp draw(:north), do: "^"
-  defp draw(:east), do: ">"
-  defp draw(:south), do: "\\/"
-  defp draw(:west), do: "<"
-
   defp in_progress({x, y, _dir}) when x > 0 or y > 0, do: true
   defp in_progress(_), do: false
+
+  defp cell_name({x, y}), do: "cell-#{x}-#{y}"
 end
